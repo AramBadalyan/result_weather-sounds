@@ -1,0 +1,99 @@
+$weathers: ["summer", "rainy", "winter"];
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('./fonts/Roboto-Regular.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background: center / cover no-repeat;
+    background-image: linear-gradient(-225deg, #FF3CAC 0%, #562B7C 52%, #2B86C5 100%);
+    backdrop-filter: blur(5px);
+    transition: 1s ease-in-out;
+}
+
+.main {
+    max-width: 1028px;
+    margin: 0 auto;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+h1 {
+    font-size: 64px;
+    text-shadow: 0 0 12px black;
+    color: white;
+}
+
+.buttons__wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.button {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid white;
+    border-radius: 12px;
+    background: center / cover no-repeat;
+
+    &::before,
+    &::after {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        top: 25%;
+        left: 25%;
+        background: center / contain no-repeat;
+        transition: 0.3s ease-in-out;
+    }
+
+    &::before {
+        content: "";
+    }
+
+    &::after {
+        content: none;
+    }
+
+    &:hover::before,
+    &:hover::after {
+        scale: 1.1;
+    }
+}
+
+@each $weather in $weathers {
+    .button__#{$weather} {
+        background-image: url("./assets/images/#{$weather}-bg.jpg");
+
+        &::before {
+            background-image: url("./assets/icons/#{$weather}.svg");
+        }
+    }
+}
+
+.button.paused::before {
+    content: none;
+}
+
+.button.paused::after {
+    content: "";
+    background-image: url("./assets/icons/pause.svg");
+}
+
+.button__title {
+    display: none;
+}
