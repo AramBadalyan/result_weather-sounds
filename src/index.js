@@ -9,7 +9,7 @@ window.onload = function () {
   const volumeControl = document.getElementById('volume-control')
 
   weatherButtons.forEach((weatherButton) => {
-    weatherButton.onclick = setWeather
+    weatherButton.addEventListener('click', setWeather)
   })
 
   currentVolume = volumeControl.value
